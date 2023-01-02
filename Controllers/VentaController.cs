@@ -1,20 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using sistema_de_gestion.Repository;
 using sistema_de_gestion.Models;
+using sistema_de_gestion.Repository;
 
 namespace sistema_de_gestion.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UsuarioController : Controller
+    public class VentaController : Controller
     {
-        private UsuarioRepository repository = new UsuarioRepository();
+        private VentaRepository repository = new VentaRepository();
+
         [HttpGet]
-        public ActionResult<List<Usuario>> Get()
+        public ActionResult<List<Venta>> Get()
         {
             try
             {
-                List<Usuario> lista = repository.getUsuario();
+                List<Venta> lista = repository.getVenta();
                 return Ok(lista);
             }
             catch (Exception ex)
@@ -25,12 +26,12 @@ namespace sistema_de_gestion.Controllers
 
         [HttpPost]
         [Route("[action]")]
-        public ActionResult Post([FromBody] Usuario usuario)
+        public ActionResult Post([FromBody] Venta venta)
         {
             try
             {
-                Usuario crearUsuario = repository.CrearUsuario(usuario);
-                return StatusCode(StatusCodes.Status201Created, crearUsuario);
+                Venta crearVenta = repository.CrearVenta(venta);
+                return StatusCode(StatusCodes.Status201Created, crearVenta);
             }
             catch (Exception ex)
             {
@@ -38,19 +39,19 @@ namespace sistema_de_gestion.Controllers
             }
         }
 
-        [HttpGet("GetUsuario/{id}")]
-        public ActionResult<Producto> GetUsuario(int id)
+        [HttpGet("GetVenta/{id}")]
+        public ActionResult<Venta> GetVenta(int id)
         {
             try
             {
-                Usuario? usuario = repository.ObtenerUsuario(id);
-                if (usuario != null)
+                Venta? venta = repository.ObtenerVenta(id);
+                if (venta != null)
                 {
-                    return Ok(usuario);
+                    return Ok(venta);
                 }
                 else
                 {
-                    return NotFound("El usuario no fue encontrado");
+                    return NotFound("La venta no fue encontrada");
                 }
             }
             catch (Exception ex)
@@ -65,8 +66,8 @@ namespace sistema_de_gestion.Controllers
         {
             try
             {
-                bool EliminarUsuario = repository.EliminarUsuario(id);
-                if (EliminarUsuario)
+                bool EliminarVenta = repository.EliminarVenta(id);
+                if (EliminarVenta)
                 {
                     return Ok();
                 }
@@ -80,18 +81,18 @@ namespace sistema_de_gestion.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult<Usuario> Put(long id, [FromBody] Usuario usuarioAActualizar)
+        public ActionResult<Venta> Put(long id, [FromBody] Venta ventaAActualizar)
         {
             try
             {
-                Usuario? usuarioActualizado = repository.ActualizarUsuario(id, usuarioAActualizar);
-                if (usuarioActualizado != null)
+                Venta? ventaActualizada = repository.ActualizarVenta(id, ventaAActualizar);
+                if (ventaActualizada != null)
                 {
-                    return Ok(usuarioActualizado);
+                    return Ok(ventaActualizada);
                 }
                 else
                 {
-                    return NotFound("El usuario no fue encontrado");
+                    return NotFound("La venta no fue encontrada");
                 }
             }
             catch (Exception ex)

@@ -5,30 +5,33 @@ namespace sistema_de_gestion.Models
     public class Producto
     {
         public long Id { get; set; }
-        public long IdUsuario { get; set; }
-        public double Costo { get; set; }
-        public double PrecioVenta { get; set; }
+        public string Descripcion { get; set; }
+        public decimal Costo { get; set; }
+        public decimal PrecioVenta { get; set; }
         public int Stock { get; set; }
-        public string Descripciones { get; set; }
+        public int IdUsuario { get; set; }
+
 
         public Producto()
         {
             Id = 0;
-            IdUsuario = 0;
+            Descripcion = "";
             Costo = 0;
             PrecioVenta = 0;
             Stock = 0;
-            Descripciones = "";
+            IdUsuario = 0;
+
         }
-        public Producto(long id, long idUsuario, double costo, double precioVenta, int stock, string descripciones)
+
+        public Producto(long codigo, string descripcion, decimal costo, decimal precioVenta, int stock, int idUsuario)
         {
-            Id = id;
-            IdUsuario = idUsuario;
+            Id = codigo;
+            Descripcion = descripcion;
             Costo = costo;
             PrecioVenta = precioVenta;
             Stock = stock;
-            Descripciones = descripciones;
-        }
+            IdUsuario = idUsuario;
 
+        }
     }
 }
